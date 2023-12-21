@@ -1,8 +1,8 @@
 package dt.project.java.web;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +13,10 @@ import dt.project.java.service.StudentService;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping({ "/", "/main" })
 // @EnableWebMvc
 public class MainController {
 
@@ -39,42 +40,34 @@ public class MainController {
     // HTMX Handling
 
     @GetMapping("/get-students")
-    public String getStudents(Model model) {
+    public String getAllStudents(Model model) {
         model.addAttribute("students", studentService.getStudents());
 
         return "htmx-fragments/get-students";
     }
 
     @GetMapping("/get-student/{studentIndex}")
-    public String getStudent(Model model, @PathVariable Long studentIndex) {
+    public String getOneStudent(Model model, @PathVariable Long studentIndex) {
         model.addAttribute("student", studentService.getStudent(studentIndex));
         return "htmx-fragments/student-item";
     }
 
-    @PostMapping("/mouse_entered")
-    public String postMethodName(Model model) {
-        model.addAttribute("students", studentService.getStudents());
-        return "htmx-fragments/get-students";
-    }
-
     @GetMapping("/edit/student/{studentIndex}")
-    public String getEditStudent(Model model, @PathVariable Long studentIndex) {
+    public String getEditStudentPage(Model model, @PathVariable(required = false) Long studentIndex) {
+        if (studentIndex == null) {
+            return "htmx-fragments/edit-student";
+        }
         model.addAttribute("student", studentService.getStudent(studentIndex));
         return "htmx-fragments/edit-student";
     }
 
-    // @RequestBody StudentDto studentDto
     @PostMapping("/edit/student")
-    public String putMethodName(
+    public String editExistingStudent(
             Model model,
             HttpServletResponse response,
-            @RequestParam(value = "id", required = false) Long studentIndex,
-            @RequestParam(value = "name", required = false) String studentName,
-            @RequestParam(value = "age", required = false) String studentSurname) {
-
-        System.out.println("studentIndex: " + studentIndex);
-        System.out.println("studentName: " + studentName);
-        System.out.println("studentSurname: " + studentSurname);
+            @RequestParam(value = "id") Long studentIndex,
+            @RequestParam(value = "name") String studentName,
+            @RequestParam(value = "age") String studentSurname) {
 
         StudentDto studentDto = new StudentDto(studentIndex, studentName, studentSurname);
 
@@ -83,9 +76,37 @@ public class MainController {
         model.addAttribute("student", studentService.getStudent(studentIndex));
 
         response.addHeader("HX-Trigger", "editedUser");
+        return getOneStudent(model, studentIndex);
 
-        return getStudent(model, studentIndex);
+    }
 
+    @GetMapping("/add/student")
+    public String getAddStudentPage(Model model) {
+        return "htmx-fragments/add-student";
+    }
+
+    @PostMapping("/add/student")
+    public void addNewStudent(
+            Model model,
+            HttpServletResponse response,
+            @RequestParam(value = "name", required = false) String studentName,
+            @RequestParam(value = "age", required = false) String studentSurname) {
+
+        if (studentName != null && studentSurname != null && studentName != "" && studentSurname != "") {
+
+            studentService.addStudent(studentName, studentSurname);
+
+            response.addHeader("HX-Trigger", "editedUser");
+        }
+    }
+
+    @DeleteMapping("/delete/student/{id}")
+    public void postMethodName(HttpServletResponse response,
+            @PathVariable Long id) {
+
+        studentService.deleteStudent(id);
+
+        response.addHeader("HX-Trigger", "editedUser");
     }
 
 }

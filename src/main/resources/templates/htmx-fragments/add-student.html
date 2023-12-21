@@ -1,0 +1,24 @@
+<form>
+    <div>
+        <label>First Name</label>
+        <input
+            type="text"
+            name="name"
+            required
+            placeholder="Enter Student Name" />
+    </div>
+    <div class="form-group">
+        <label>Age</label>
+        <input
+            type="text"
+            name="age"
+            required
+            placeholder="Enter Student Age" />
+    </div>
+    <button
+        class="btn btn-info"
+        hx-post="/main/add/student"
+        hx-target="closest div">
+        Submit
+    </button>
+</form>

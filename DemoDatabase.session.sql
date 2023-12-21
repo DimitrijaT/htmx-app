@@ -3,4 +3,7 @@
 --     name TEXT)
 
 
-SELECT * FROM Foo
+-- SELECT * FROM Foo
+
+DROP TABLE IF EXISTS student;
+

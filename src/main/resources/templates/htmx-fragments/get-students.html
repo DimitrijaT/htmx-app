@@ -1,5 +1,6 @@
 <th:block th:each="student : ${students}">
-    <div hx-target="this">
+    <div hx-target="this" hx-trigger="editedUser from:body"
+    hx-get="/main/get-students">
         <p
             th:text="${student.name}"
             class="student-name text-sm font-semibold leading-6 text-gray-900">
@@ -15,5 +16,17 @@
             class="btn btn-primary">
             Click To Edit
         </button>
+        <button
+            class="btn btn-danger"
+            th:hx-delete="@{/main/delete/student/{id}  (id = ${student.id}) }">
+            Delete
+        </button>
     </div>
 </th:block>
+
+<style>
+    tr.htmx-swapping td {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+</style>

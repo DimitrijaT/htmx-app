@@ -41,4 +41,21 @@ public class ServiceImpl implements StudentService {
                 }
         }
 
+        @Override
+        public boolean addStudent(String studentName, String studentSurname) {
+                Student student = new Student(studentName, studentSurname);
+                studentRepository.save(student);
+                return true;
+        }
+
+        @Override
+        public boolean deleteStudent(Long studentIndex) {
+                try {
+                        studentRepository.deleteById(studentIndex);
+                        return true;
+                } catch (Exception e) {
+                        return false;
+                }
+        }
+
 }

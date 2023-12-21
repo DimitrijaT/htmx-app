@@ -12,4 +12,8 @@ public interface StudentService {
 
         public boolean updateStudent(StudentDto studentDto);
 
+        public boolean addStudent(String studentName, String studentSurname);
+
+        public boolean deleteStudent(Long studentIndex);
+
 }
