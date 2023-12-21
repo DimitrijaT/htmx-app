@@ -5,5 +5,5 @@ import java.util.List;
 import dt.project.java.model.Student;
 
 public interface StudentService {
-        public List<Student> getStudent();
+        public List<Student> getStudents();
 }
