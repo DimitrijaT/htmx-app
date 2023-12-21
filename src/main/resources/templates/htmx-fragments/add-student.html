@@ -1,19 +1,24 @@
-<form>
-    <div>
-        <label>First Name</label>
+<form class="max-w-md mx-auto my-4">
+    <div class="mb-4">
+        <label for="name" class="block text-gray-700">First Name</label>
         <input
             type="text"
+            id="name"
             name="name"
             required
-            placeholder="Enter Student Name" />
+            placeholder="Enter Student Name"
+            class="mt-1 p-2 w-full border rounded-md" />
     </div>
-    <div class="form-group">
-        <label>Age</label>
+
+    <div class="mb-4">
+        <label for="age" class="block text-gray-700">Age</label>
         <input
             type="text"
+            id="age"
             name="age"
             required
-            placeholder="Enter Student Age" />
+            placeholder="Enter Student Age"
+            class="mt-1 p-2 w-full border rounded-md" />
     </div>
     <button
         class="btn btn-info"
