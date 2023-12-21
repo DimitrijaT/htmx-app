@@ -1,0 +1,17 @@
+<div hx-trigger="editedUser from:body">
+    <p
+        th:text="${student.name}"
+        class="student-name text-sm font-semibold leading-6 text-gray-900">
+        Default Name
+    </p>
+    <p
+        th:text="${student.age}"
+        class="student-age mt-1 truncate text-xs leading-5 text-gray-500">
+        Default Age
+    </p>
+    <button
+        th:hx-get="@{/main/edit/student/{id}  (id = ${student.id}) }"
+        class="btn btn-primary">
+        Click To Edit
+    </button>
+</div>
