@@ -1,0 +1,10 @@
+<tr th:each="student, iStat : ${studentPage.content}">
+    <td th:text="${student.id}" />
+    <td th:text="${student.name}" />
+    <td th:text="${student.age}" />
+</tr>
+
+<th:block th:if="${currentPage != null}">
+    <tr th:hx-get="@{/student-page?page={id}  (id = ${currentPage+1}) }" hx-trigger="revealed" hx-swap="afterend">
+        
+    </tr>
