@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dt.project.java.model.dto.StudentDto;
 import dt.project.java.service.StudentService;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
@@ -23,6 +24,7 @@ public class MainControllerFragments {
         this.studentService = studentService;
     }
 
+    @HxRequest
     @GetMapping("/get-students")
     public String getAllStudents(Model model) {
         model.addAttribute("students", studentService.getStudents());
@@ -30,12 +32,14 @@ public class MainControllerFragments {
         return "htmx-fragments/get-students";
     }
 
+    @HxRequest
     @GetMapping("/get-student/{studentIndex}")
     public String getOneStudent(Model model, @PathVariable Long studentIndex) {
         model.addAttribute("student", studentService.getStudent(studentIndex));
         return "htmx-fragments/student-item";
     }
 
+    @HxRequest
     @GetMapping("/edit/student/{studentIndex}")
     public String getEditStudentPage(Model model, @PathVariable(required = false) Long studentIndex) {
         if (studentIndex == null) {
@@ -45,6 +49,7 @@ public class MainControllerFragments {
         return "htmx-fragments/edit-student";
     }
 
+    @HxRequest
     @PostMapping("/edit/student")
     public String editExistingStudent(
             Model model,
@@ -64,11 +69,15 @@ public class MainControllerFragments {
 
     }
 
+
+    @HxRequest
     @GetMapping("/add/student")
     public String getAddStudentPage(Model model) {
         return "htmx-fragments/add-student";
     }
 
+
+    @HxRequest
     @PostMapping("/add/student")
     public void addNewStudent(
             Model model,
@@ -84,6 +93,7 @@ public class MainControllerFragments {
         }
     }
 
+    @HxRequest
     @DeleteMapping("/delete/student/{id}")
     public void postMethodName(HttpServletResponse response,
             @PathVariable Long id) {

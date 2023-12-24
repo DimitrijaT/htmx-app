@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dt.project.java.model.Student;
 import dt.project.java.service.StudentService;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 
 @Controller
 @RequestMapping({ "/", "/main" })
@@ -25,6 +26,7 @@ public class InfiniteScrollingControllerFragments {
     }
 
     // Pagination
+    @HxRequest
     @GetMapping("/student-page")
     public String pagableListStudents(
             Model model,
@@ -34,7 +36,7 @@ public class InfiniteScrollingControllerFragments {
         Page<Student> studentPage = studentService.findPaginated(PageRequest.of(currentPage - 1, 5));
         model.addAttribute("studentPage", studentPage);
 
-        if (studentPage.getTotalPages() == currentPage) {
+        if (studentPage.getContent().size() == currentPage) {
             currentPage = null;
         }
 

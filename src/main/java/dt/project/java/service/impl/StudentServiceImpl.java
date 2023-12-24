@@ -2,16 +2,16 @@ package dt.project.java.service.impl;
 
 import java.util.List;
 
-import dt.project.java.model.Student;
-import dt.project.java.model.dto.StudentDto;
-import dt.project.java.repository.StudentRepository;
-import dt.project.java.service.StudentService;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import dt.project.java.model.Student;
+import dt.project.java.model.dto.StudentDto;
+import dt.project.java.repository.StudentRepository;
+import dt.project.java.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -82,6 +82,12 @@ public class StudentServiceImpl implements StudentService {
 
                 return bookPage;
 
+        }
+
+        @Override
+        public List<Student> findStudents(String queryParam) {
+                List<Student> students = studentRepository.findByNameContainingIgnoreCase(queryParam);
+                return students;
         }
 
 }

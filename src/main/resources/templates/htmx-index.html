@@ -1,9 +1,6 @@
 <div class="container mx-auto p-8">
     <div class="pb-5">
-        <button
-            class="btn btn-primary"
-            hx-get="/add/student"
-            hx-target=".newStudentDiv">
+        <button class="btn btn-primary" hx-get="/add/student" hx-target=".newStudentDiv">
             Add new student
         </button>
     </div>
@@ -12,8 +9,7 @@
     <div class="mb-8">
         <button
             class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-            hx-get="/main/get-students"
-            hx-target="#content">
+            hx-get="/main/get-students" hx-target="#content">
             Click Me
         </button>
     </div>
@@ -22,23 +18,12 @@
         <div id="content" class="bg-gray-100 p-4 rounded"></div>
     </div>
 
-    <div
-        class="p-2 bg-indigo-800 flex items-center text-indigo-100 leading-none rounded-lg"
-        role="alert"
-        hx-get="/main/get-students"
-        hx-trigger="mouseenter once"
-        hx-target=".radnom-mouse-movement-class-example">
-        <span
-            class="bg-indigo-500 text-xs font-bold uppercase px-2 py-1 rounded-full mr-3"
-            >New</span
-        >
+    <div class="p-2 bg-indigo-800 flex items-center text-indigo-100 leading-none rounded-lg" role="alert"
+        hx-get="/main/get-students" hx-trigger="mouseenter once" hx-target=".radnom-mouse-movement-class-example">
+        <span class="bg-indigo-500 text-xs font-bold uppercase px-2 py-1 rounded-full mr-3">New</span>
         <span class="flex-auto font-semibold mr-2 text-left">Hover on me!</span>
-        <svg
-            class="fill-current opacity-75 h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20">
-            <path
-                d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+        <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
         </svg>
     </div>
 

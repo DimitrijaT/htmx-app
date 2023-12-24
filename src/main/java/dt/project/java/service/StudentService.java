@@ -13,6 +13,8 @@ public interface StudentService {
 
         public Student getStudent(Long index);
 
+        public List<Student> findStudents(String queryParam);
+
         public boolean updateStudent(StudentDto studentDto);
 
         public boolean addStudent(String studentName, String studentSurname);

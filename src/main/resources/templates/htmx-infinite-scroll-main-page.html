@@ -1,4 +1,4 @@
-<table class="studentTable table table-hover">
+<table hx-indicator=".htmx-indicator, #indicator, center" class="studentTable table table-hover">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -18,8 +18,10 @@
         <tr hx-get="/student-page?page=2" hx-trigger="revealed" hx-swap="afterend"></tr>
     </tbody>
 
-</table>
 
+</table>
 <center>
     <img alt="Result loading..." id="indicator" class="htmx-indicator" width="100" src="svg/Spinner-1s-200px.svg" />
 </center>
+
+
